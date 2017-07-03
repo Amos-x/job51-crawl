@@ -103,12 +103,15 @@ DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
 
 REDIS_URL = 'redis://WIN-71FAQV3R1RH:wyx379833553@192.168.0.2:6379'
 
-# 爬取结束后保存指纹和请求队列信息
+# 爬取结束后保存指纹和请求队列信息,默认为Flase
 SCHEDULER_PERSIST = True
 
 # 当请求队列为空时等待时间，避免因请求生成速度慢时，爬虫结束而导致爬取不完全
 SCHEDULER_IDLE_BEFORE_CLOSE = 20
 
-# 爬取城市列表，
+# 爬取城市列表，不可注释，可为空
 CITYNUM_LIST = ['030200','040000','030500']
+
+# 单机多进程开启核心数，若使用单机多进程模拟分布式爬取，则不可注释。
+CORENUM = 3
 

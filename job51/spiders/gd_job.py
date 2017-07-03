@@ -12,8 +12,9 @@ class GdJobSpider(scrapy.Spider):
     search_url = 'http://search.51job.com/list/{city},000000,0000,00,9,99,%2B,2,{page}.html?lang=c&stype=1&postchannel=0000&workyear=99&cotype=99&degreefrom=99&jobterm=99&companysize=99&lonlat=0%2C0&radius=-1&ord_field=0&confirmdate=9&fromType=&dibiaoid=0&address=&line=&specialarea=00&from=&welfare='
 
     def start_requests(self):
-        for citynum in CITYNUM_LIST:
-            yield scrapy.Request(self.search_url.format(city=citynum,page=1),callback=self.next_url,meta={'city':citynum})
+        if CITYNUM_LIST:
+            for citynum in CITYNUM_LIST:
+                yield scrapy.Request(self.search_url.format(city=citynum,page=1),callback=self.next_url,meta={'city':citynum})
 
     def next_url(self,response):
         total = int(response.css('div.p_wp .p_in span.td::text').extract_first()[1:-4])

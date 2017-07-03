@@ -1,5 +1,6 @@
 import os
 from multiprocessing import Process
+from job51.settings import CORENUM
 
 class scheduler(object):
 
@@ -8,12 +9,11 @@ class scheduler(object):
         os.system('scrapy crawl gd_job')
 
     def run(self):
-        process1 = Process(target=scheduler.crawl)
-        process2 = Process(target=scheduler.crawl)
-        process3 = Process(target=scheduler.crawl)
-        process1.start()
-        process2.start()
-        process3.start()
+        names = locals()
+        if CORENUM:
+            for x in range(CORENUM):
+                names['process%x' % x] = Process(target=scheduler.crawl)
+                names['process%x' % x].start()
 
 if __name__ == '__main__':
     r = scheduler()
