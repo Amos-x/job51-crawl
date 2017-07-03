@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-
+from job51.settings import CITYNUM_LIST
 from job51.items import Job51Item
 
 
@@ -12,11 +12,13 @@ class GdJobSpider(scrapy.Spider):
     search_url = 'http://search.51job.com/list/{city},000000,0000,00,9,99,%2B,2,{page}.html?lang=c&stype=1&postchannel=0000&workyear=99&cotype=99&degreefrom=99&jobterm=99&companysize=99&lonlat=0%2C0&radius=-1&ord_field=0&confirmdate=9&fromType=&dibiaoid=0&address=&line=&specialarea=00&from=&welfare='
 
     def start_requests(self):
-        for page_num in range(1,2001):
-            yield scrapy.Request(self.search_url.format(city='030200', page=page_num), callback=self.parse)
-            yield scrapy.Request(self.search_url.format(city='040000', page=page_num), callback=self.parse)
-        for page_x in range(1,506):
-            yield scrapy.Request(self.search_url.format(city='030500', page=page_x), callback=self.parse)
+        for citynum in CITYNUM_LIST:
+            yield scrapy.Request(self.search_url.format(city=citynum,page=1),callback=self.next_url,meta={'city':citynum})
+
+    def next_url(self,response):
+        total = int(response.css('div.p_wp .p_in span.td::text').extract_first()[1:-4])
+        for page_num in range(1,total+1):
+            yield scrapy.Request(self.search_url.format(city=response.meta['city'], page=page_num), callback=self.parse)
 
     def parse(self, response):
         jobs_list = response.css('.el p.t1 span a::attr(href)').extract()
