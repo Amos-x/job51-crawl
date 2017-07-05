@@ -113,5 +113,5 @@ SCHEDULER_IDLE_BEFORE_CLOSE = 20
 CITYNUM_LIST = ['030200','040000','030500']
 
 # 单机多进程开启核心数，若使用单机多进程模拟分布式爬取，则不可注释。
-CORENUM = 3
+CORE_NUMBER = 3
 

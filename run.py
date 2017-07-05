@@ -1,8 +1,14 @@
 import os
 from multiprocessing import Process
-from job51.settings import CORENUM
+try:
+    from job51.settings import CORE_NUMBER
+except:
+    CORE_NUMBER=None
 
 class scheduler(object):
+
+    def __init__(self):
+        self.core_number = CORE_NUMBER
 
     @staticmethod
     def crawl():
@@ -10,11 +16,13 @@ class scheduler(object):
 
     def run(self):
         names = locals()
-        if CORENUM:
-            for x in range(CORENUM):
+        if self.core_number:
+            for x in range(self.core_number):
                 names['process%x' % x] = Process(target=scheduler.crawl)
                 names['process%x' % x].start()
+
 
 if __name__ == '__main__':
     r = scheduler()
     r.run()
+
