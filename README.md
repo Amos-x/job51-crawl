@@ -15,9 +15,15 @@ job51-crawl
  REDIS_URL = 'redis://root:123456@192.168.0.2:6379'
 
 
+<<<<<<< HEAD
 run.py 为模拟分布式爬取的单机多进程爬取启动文件,通过设置settings.py 文件中的CORENUM 来自定义开启核心数(ps:最好不大于电脑自身核心数)，启动方式：
  CORENUM = 3
  python run.py （处于文件目录下）
+=======
+# run.py 为模拟分布式爬取的单机多进程爬取启动文件,通过设置settings.py 文件中的CORENUM 来自定义开启核心数(ps:最好不大于电脑自身核心数)，启动方式：
+# CORE_NUMBER = 3
+# python run.py （处于文件目录下）
+>>>>>>> origin/master
 
 
  效果等同于多机分布式爬取，但有cpu核心数限制，速度有限。
