@@ -29,7 +29,7 @@ ROBOTSTXT_OBEY = False
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 CONCURRENT_REQUESTS = 32
 
-# CONCURRENT_ITEMS = 1
+CONCURRENT_ITEMS = 2
 
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
@@ -73,7 +73,7 @@ COOKIES_ENABLED = False
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'job51.pipelines.save_mongo': 300,
-   'scrapy_redis.pipelines.RedisPipeline': 301
+   # 'scrapy_redis.pipelines.RedisPipeline': 301
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -110,7 +110,7 @@ SCHEDULER_PERSIST = True
 SCHEDULER_IDLE_BEFORE_CLOSE = 20
 
 # 爬取城市列表，不可注释，可为空
-CITYNUM_LIST = ['030200','040000','030500']
+CITYNUM_LIST = ['030200','040000','030500','030800','030700','030600']
 
 # 单机多进程开启核心数，若使用单机多进程模拟分布式爬取，则不可注释。
 CORE_NUMBER = 3
