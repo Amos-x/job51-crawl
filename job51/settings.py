@@ -109,8 +109,10 @@ SCHEDULER_PERSIST = True
 # 当请求队列为空时等待时间，避免因请求生成速度慢时，爬虫结束而导致爬取不完全
 SCHEDULER_IDLE_BEFORE_CLOSE = 20
 
-# 爬取城市列表，不可注释，可为空
-CITYNUM_LIST = ['030200','040000','030500','030800','030700','030600']
+# 是否爬取全部城市，为真时忽略爬取城市列表
+CRAWL_ALL_CITYS = True
+# 当CRAWL_ALL_CITYS=False时，设置爬取城市列表，为空则不进行爬取
+CRAWL_CITY_LIST = ['广州','深圳','珠海']
 
 # 单机多进程开启核心数，若使用单机多进程模拟分布式爬取，则不可注释。
 CORE_NUMBER = 3

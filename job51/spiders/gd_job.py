@@ -1,20 +1,24 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from job51.settings import CITYNUM_LIST
+from job51.city_list import citys
 from job51.items import Job51Item
-
 
 class GdJobSpider(scrapy.Spider):
     name = "gd_job"
     allowed_domains = ["www.51job.com",'search.51job.com','jobs.51job.com']
     start_urls = ['http://www.51job.com/']
-
     search_url = 'http://search.51job.com/list/{city},000000,0000,00,9,99,%2B,2,{page}.html?lang=c&stype=1&postchannel=0000&workyear=99&cotype=99&degreefrom=99&jobterm=99&companysize=99&lonlat=0%2C0&radius=-1&ord_field=0&confirmdate=9&fromType=&dibiaoid=0&address=&line=&specialarea=00&from=&welfare='
 
     def start_requests(self):
-        if CITYNUM_LIST:
-            for citynum in CITYNUM_LIST:
-                yield scrapy.Request(self.search_url.format(city=citynum,page=1),callback=self.next_url,meta={'city':citynum})
+        crawl_all_city = self.settings.get('CRAWL_ALL_CITYS')
+        crawl_city_list = self.settings.get('CRAWL_CITY_LIST')
+        if crawl_all_city:
+            for city_num in citys.values():
+                yield scrapy.Request(self.search_url.format(city=city_num, page=1), callback=self.next_url,meta={'city': city_num})
+        else:
+            if crawl_city_list:
+                for citynum in crawl_city_list:
+                    yield scrapy.Request(self.search_url.format(city=citynum,page=1),callback=self.next_url,meta={'city':citynum})
 
     def next_url(self,response):
         total = int(response.css('div.p_wp .p_in span.td::text').extract_first()[1:-4])
