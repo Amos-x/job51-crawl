@@ -36,11 +36,4 @@ scrapy-redis
 pymongo
 redis
 
-软件：
-redis
-mongodb
-python3.6
-
-
-
 
