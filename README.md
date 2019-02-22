@@ -1,5 +1,6 @@
 # job51-crawl
 > 可爬取51job.com 网站上的所有城市的招聘信息，并将数据保存至数据库，利用scrapy框架
+
 PS: 不提供长期支持，仅用于学习交流，By Amos
 
 ## 使用
@@ -27,13 +28,3 @@ REDIS_URL = 'redis://yourusername:redispassword@hostaddress:port'
 ```
 CORE_NUMBER = 3
 ```
-
- 
-
-所需软件及python库,基于python3.6
-scrapy
-scrapy-redis
-pymongo
-redis
-
-
